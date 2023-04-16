@@ -13,7 +13,7 @@ window = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 pygame.display.set_caption('Space Invaders Menu')
 
 #favicon
-FAVICON = pygame.image.load('../../assets/images/favicon.jpg')
+FAVICON = pygame.image.load('../../assets/images/favicon.png')
 pygame.display.set_icon(FAVICON)
 
 #fonts
@@ -24,22 +24,17 @@ default_font = pygame.font.SysFont('arial',24)
 TEXT_BLACK_COLOR = (0,0,0)
 
 #button images
-
-exit_image = pygame.image.load('../../assets/images/buttonimages/exitbutton.jpg').convert_alpha()
+exit_image = pygame.image.load('../../assets/images/buttonimages/exitbutton.png').convert_alpha()
+level1_image = pygame.image.load('../../assets/images/buttonimages/level1.png').convert_alpha()
+level2_image = pygame.image.load('../../assets/images/buttonimages/level2.png').convert_alpha()
+level3_image = pygame.image.load('../../assets/images/buttonimages/level3.png').convert_alpha()
 
 #buttons
-#TODO correct params
-level1_button = button.Button(0,0,exit_image,0.4)
-level2_button = button.Button(200,200,exit_image,0.4)
-level3_button = button.Button(500,500,exit_image,0.4)
+level1_button = button.Button(100,200,level1_image,0.4)
+level2_button = button.Button(300,200,level2_image,0.4)
+level3_button = button.Button(500,200,level3_image,0.4)
 
-exit_button = button.Button(SCREEN_WIDTH/4,SCREEN_HEIGHT/8,exit_image,0.4)
-
-#draws text on screen
-def draw_text(text,font,text_color,x,y):
-    image = font.render(text,True,text_color)
-    window.blit(image,(x, y))
-
+exit_button = button.Button(300,325,exit_image,0.4)
 
 #game loop
 run = True
@@ -49,19 +44,18 @@ while run:
     window.fill((220,141,30))
 
     #text draw on screen
-    text.draw_text(window,'Welcome to Space Invaders!',custom_font,TEXT_BLACK_COLOR,SCREEN_WIDTH/4,SCREEN_HEIGHT/5)
+    text.draw_text(window,'welcome to space invaders!',custom_font,TEXT_BLACK_COLOR,175,SCREEN_HEIGHT/5)
 
     #draw button on screen and check for interaction
     if level1_button.draw_button(window):
         print("level 1 function needs to be written")
-        #TODO level 1 function
 
     if level2_button.draw_button(window):
         print("level 2 function needs to be written")
-        #TODO level 2 function
+
     if level3_button.draw_button(window):
         print("level 3 function needs to be written")
-        #TODO level 3 function
+
     if exit_button.draw_button(window):
         run = False
 
