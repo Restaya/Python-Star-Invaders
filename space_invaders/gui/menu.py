@@ -1,7 +1,7 @@
 import pygame
 
-import button
-import text
+import space_invaders.gui.button as button
+import space_invaders.gui.text as text
 
 # text color
 black_color = (0, 0, 0)
@@ -10,10 +10,6 @@ gray_color = (40,43,48)
 #level window parameters
 level_window_height = 600
 level_window_width = 800
-
-#favicon path
-favicon_path = '../../assets/images/favicon.png'
-
 
 def start_menu():
     pygame.init()
@@ -29,7 +25,7 @@ def start_menu():
     pygame.display.set_caption('Space Invaders Menu')
 
     # favicon
-    favicon = pygame.image.load(favicon_path)
+    favicon = pygame.image.load('../../assets/images/favicon.png')
     pygame.display.set_icon(favicon)
 
     custom_font = pygame.font.Font('../../assets/font/Starjedi.ttf', 24)
@@ -86,7 +82,7 @@ def start_game():
 
     # window creation and title
     window = pygame.display.set_mode((level_window_width, level_window_height))
-    pygame.display.set_caption('Space Invaders Level 1')
+    pygame.display.set_caption('Space Invaders')
 
     background = pygame.image.load("../../assets/images/background.png")
     background = pygame.transform.scale(background,(level_window_width,level_window_height))
@@ -99,7 +95,7 @@ def start_game():
 
 
     # favicon
-    favicon = pygame.image.load(favicon_path)
+    favicon = pygame.image.load('../../assets/images/favicon.png')
     pygame.display.set_icon(favicon)
 
     # game loop
@@ -127,5 +123,3 @@ def start_game():
         clock.tick(60)
 
 
-if __name__ == "__menu__":
-    start_menu()
