@@ -4,6 +4,7 @@ import space_invaders.gui.button as button
 import space_invaders.gui.text as text
 from space_invaders.entity.player import Player
 
+
 # text color
 black_color = (0, 0, 0)
 gray_color = (40,43,48)
@@ -66,7 +67,6 @@ def start_menu():
 
             # key press events
             if event.type == pygame.KEYDOWN:
-
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     return
@@ -78,24 +78,20 @@ def start_menu():
 def start_game():
     pygame.init()
 
-    # clock
+    # makes sure it runs on a fixed fps
     clock = pygame.time.Clock()
 
     # window creation and title
     window = pygame.display.set_mode((game_window_width, game_window_height))
     pygame.display.set_caption('Space Invaders')
 
+    #loads background
     background = pygame.image.load("../../assets/images/background.png")
     background = pygame.transform.scale(background,(game_window_width,game_window_height))
 
     #player initialized
     player_sprite = Player((game_window_width/2, game_window_height),game_window_width,game_window_height,20,10)
     player = pygame.sprite.GroupSingle(player_sprite)
-
-
-    enemy_image = pygame.image.load("../../assets/images/ship/tiefighter.png")
-    enemy_image = pygame.transform.scale(enemy_image,(50,50))
-
 
     # favicon
     favicon = pygame.image.load('../../assets/images/favicon.png')
@@ -107,8 +103,14 @@ def start_game():
         #window.fill(gray_color)
         window.blit(background,(0,0))
 
-        #draw player on screen
+        #draws player on screen
         player.draw(window)
+
+        #draws all the bolts on screen
+        player.sprite.bolts.draw(window)
+
+        #updates the bolts on screen
+        player.sprite.bolts.update()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -120,6 +122,7 @@ def start_game():
 
                 #checks for keyboard input from the player
                 player.update()
+
 
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
