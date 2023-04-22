@@ -2,14 +2,15 @@ import pygame
 
 import space_invaders.gui.button as button
 import space_invaders.gui.text as text
+from space_invaders.entity.player import Player
 
 # text color
 black_color = (0, 0, 0)
 gray_color = (40,43,48)
 
-#level window parameters
-level_window_height = 600
-level_window_width = 800
+#game window parameters
+game_window_height = 600
+game_window_width = 800
 
 def start_menu():
     pygame.init()
@@ -81,14 +82,16 @@ def start_game():
     clock = pygame.time.Clock()
 
     # window creation and title
-    window = pygame.display.set_mode((level_window_width, level_window_height))
+    window = pygame.display.set_mode((game_window_width, game_window_height))
     pygame.display.set_caption('Space Invaders')
 
     background = pygame.image.load("../../assets/images/background.png")
-    background = pygame.transform.scale(background,(level_window_width,level_window_height))
+    background = pygame.transform.scale(background,(game_window_width,game_window_height))
 
-    player_image = pygame.image.load("../../assets/images/ship/xwing.png")
-    player_image = pygame.transform.scale(player_image,(50,50))
+    #player initialized
+    player_sprite = Player((game_window_width/2, game_window_height),game_window_width,game_window_height,20,10)
+    player = pygame.sprite.GroupSingle(player_sprite)
+
 
     enemy_image = pygame.image.load("../../assets/images/ship/tiefighter.png")
     enemy_image = pygame.transform.scale(enemy_image,(50,50))
@@ -104,8 +107,8 @@ def start_game():
         #window.fill(gray_color)
         window.blit(background,(0,0))
 
-        window.blit(enemy_image,(350,0))
-        window.blit(player_image,(350,level_window_height-player_image.get_height()))
+        #draw player on screen
+        player.draw(window)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -114,6 +117,9 @@ def start_game():
 
             # key press events
             if event.type == pygame.KEYDOWN:
+
+                #checks for keyboard input from the player
+                player.update()
 
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
