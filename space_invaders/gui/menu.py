@@ -1,9 +1,10 @@
 import pygame
+import random
 
 import space_invaders.gui.button as button
 import space_invaders.gui.text as text
 from space_invaders.entity.player import Player
-
+from space_invaders.entity.enemy import Enemy
 
 # text color
 black_color = (0, 0, 0)
@@ -74,6 +75,30 @@ def start_menu():
         pygame.display.update()
         clock.tick(60)
 
+#generates enemies on screen
+def generate_enemy(enemies,min,max):
+
+    number_of_enemies = random.randint(min,max)
+
+    while len(enemies) != number_of_enemies:
+
+        enemy_pos_x = random.randint(50,game_window_width-50)
+        enemy_pos_y = random.randint(50,int(game_window_height - game_window_height/3)-50)
+
+        enemy = Enemy((enemy_pos_x, enemy_pos_y), game_window_width, game_window_height)
+        enemies.add(enemy)
+
+        if len(enemies) > 0:
+            for current_enemy in enemies:
+                if current_enemy == enemy:
+                    break
+                if pygame.sprite.collide_rect(enemy,current_enemy):
+                    enemy.kill()
+                    break
+
+        print(len(enemies))
+
+
 
 def start_game():
     pygame.init()
@@ -93,6 +118,10 @@ def start_game():
     player_sprite = Player((game_window_width/2, game_window_height),game_window_width,game_window_height,20,10)
     player = pygame.sprite.GroupSingle(player_sprite)
 
+    #enemies initialized
+    enemies = pygame.sprite.Group()
+    generate_enemy(enemies,5,10)
+
     # favicon
     favicon = pygame.image.load('../../assets/images/favicon.png')
     pygame.display.set_icon(favicon)
@@ -109,6 +138,12 @@ def start_game():
         #draws all the bolts on screen
         player.sprite.bolts.draw(window)
 
+        #draws enemies on the screen
+        enemies.draw(window)
+
+        #generates the inital enemies
+        generate_enemy(enemies, 5, 10)
+
         #updates the bolts on screen
         player.sprite.bolts.update()
 
@@ -119,6 +154,10 @@ def start_game():
 
             # key press events
             if event.type == pygame.KEYDOWN:
+
+                if event.key == pygame.K_f:
+                    enemies.empty()
+                    generate_enemy(enemies,5,10)
 
                 #checks for keyboard input from the player
                 player.update()
