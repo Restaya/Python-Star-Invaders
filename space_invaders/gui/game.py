@@ -29,6 +29,8 @@ class Game:
         self.enemies = pygame.sprite.Group()
         self.enemy_bolts = pygame.sprite.Group()
 
+        self.frequency = 250
+
     def start_menu(self):
         pygame.init()
 
@@ -126,11 +128,15 @@ class Game:
         #checks if player hit an enemy
         if player.sprite.bolts:
             for bolt in player.sprite.bolts:
-                enemies_hit = pygame.sprite.spritecollide(bolt,self.enemies,True)
+                enemies_hit = pygame.sprite.spritecollide(bolt,self.enemies,False)
                 if enemies_hit:
                     for enemy in enemies_hit:
                         bolt.kill()
-                        self.score += enemy.score_value
+                        enemy.hp -= 1
+                        if enemy.hp == 0:
+                            self.score += enemy.score_value
+                            enemy.kill()
+
 
         #checks if an enemy hit the player
         if self.enemy_bolts.sprites():
@@ -171,7 +177,7 @@ class Game:
 
         #enemies timer of shooting
         enemy_bolt_frequency = pygame.USEREVENT + 1
-        pygame.time.set_timer(enemy_bolt_frequency,250)
+        pygame.time.set_timer(enemy_bolt_frequency,self.frequency)
 
         # game loop
         while True:
@@ -190,6 +196,14 @@ class Game:
                 player.sprite.bolts.empty()
                 self.enemy_bolts.empty()
                 self.generate_enemy(self.enemies,5,10)
+
+           # if there's less then two enemies, shooting frequency gets halved, so it's not unfair
+            if len(self.enemies) <= 2:
+                self.frequency *= 2
+
+            #if there's more enemy then two, shooting frequency goes back to normal
+            if len(self.enemies) > 2:
+                self.frequency = 250
 
             # checks for collisions
             self.check_collision(player)
