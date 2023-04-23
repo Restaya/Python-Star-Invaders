@@ -1,6 +1,8 @@
 import pygame
 from space_invaders.entity.bolt import Bolt
 
+import random
+
 class Enemy(pygame.sprite.Sprite):
 
     def __init__(self,position,screen_width,screen_height,hp = 1):
@@ -11,6 +13,7 @@ class Enemy(pygame.sprite.Sprite):
         self.max_x = screen_width
         self.max_y = screen_height
         self.hp = hp
+        self.score_value = self.hp * 1
 
 
     def destroy(self):
@@ -19,12 +22,36 @@ class Enemy(pygame.sprite.Sprite):
 
     #ensures enemy doesn't generate outside of the window
     def check_constraint(self):
-        if self.rect.left <= 0:
-            self.rect.left = 0
-        if self.rect.right >= self.max_x:
-            self.rect.right = self.max_x
-        if self.rect.top <= self.max_y - self.max_y/3:
-            self.rect.top = self.max_y - self.max_y/3
-        if self.rect.bottom >= self.max_y:
-            self.rect.bottom = self.max_y
+        if self.rect.left <= 10:
+            self.rect.left = 10
+        if self.rect.right >= self.max_x - 10:
+            self.rect.right = self.max_x - 10
+        if self.rect.top <= 0:
+            self.rect.top = 0
+        if self.rect.bottom >= self.max_y - self.max_y/3:
+            self.rect.bottom = self.max_y - self.max_y/3
+
+
+    def movement(self):
+
+        directions = ["up","down","left","right"]
+
+        direction = random.choice(directions)
+
+        if direction == "up":
+            self.rect.top -= 1
+            self.check_constraint()
+        if direction == "down":
+            self.rect.bottom += 1
+            self.check_constraint()
+        if direction == "left":
+            self.rect.left -= 1
+            self.check_constraint()
+        if direction == "right":
+            self.rect.right += 1
+            self.check_constraint()
+
+
+
+
 
