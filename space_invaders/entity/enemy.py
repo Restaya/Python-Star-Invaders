@@ -1,26 +1,21 @@
 import pygame
-from space_invaders.entity.bolt import Bolt
 
 import random
 
+
 class Enemy(pygame.sprite.Sprite):
 
-    def __init__(self,position,screen_width,screen_height,hp = 1):
+    def __init__(self, position, screen_width, screen_height, hp=1):
         super().__init__()
-        self.image = pygame.image.load("../../assets/images/ship/tiefighter.png").convert_alpha()
-        self.image = pygame.transform.scale(self.image,(50,50))
-        self.rect = self.image.get_rect(center = position)
+        self.image = pygame.image.load("../assets/images/ship/tiefighter.png").convert_alpha()
+        self.image = pygame.transform.scale(self.image, (50, 50))
+        self.rect = self.image.get_rect(center=position)
         self.max_x = screen_width
         self.max_y = screen_height
         self.hp = hp
         self.score_value = self.hp * 1
 
-
-    def destroy(self):
-        if self.hp == 0:
-            self.kill()
-
-    #ensures enemy doesn't generate outside of the window
+    # ensures enemy doesn't generate outside the window
     def check_constraint(self):
         if self.rect.left <= 10:
             self.rect.left = 10
@@ -31,10 +26,10 @@ class Enemy(pygame.sprite.Sprite):
         if self.rect.bottom >= self.max_y - self.max_y/3:
             self.rect.bottom = self.max_y - self.max_y/3
 
-
+    # makes enemies move in a random direction
     def movement(self):
 
-        directions = ["up","down","left","right"]
+        directions = ["up", "down", "left", "right"]
 
         direction = random.choice(directions)
 
@@ -50,8 +45,3 @@ class Enemy(pygame.sprite.Sprite):
         if direction == "right":
             self.rect.right += 1
             self.check_constraint()
-
-
-
-
-

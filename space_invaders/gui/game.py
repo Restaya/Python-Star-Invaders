@@ -2,26 +2,27 @@ import pygame
 import random
 
 import space_invaders.gui.button as button
-import space_invaders.gui.text as text
 from space_invaders.entity.player import Player
 from space_invaders.entity.enemy import Enemy
 from space_invaders.entity.bolt import Bolt
 
-# text color
-black_color = (0, 0, 0)
-gray_color = (40,43,48)
+
+# draws text on given surface
+def draw_text(surface, text, font, text_color, x, y):
+    image = font.render(text, True, text_color)
+    surface.blit(image, (x, y))
 
 
 class Game:
 
-    def __init__(self,game_window_width,game_window_height,score_to_win):
+    def __init__(self, game_window_width, game_window_height, score_to_win):
         self.game_window_width = game_window_width
         self.game_window_height = game_window_height
         self.title = "Space Invaders"
 
         pygame.init()
-        self.font = pygame.font.Font('../../assets/font/Starjedi.ttf', 24)
-        self.favicon = pygame.image.load('../../assets/images/favicon.png')
+        self.font = pygame.font.Font('../assets/font/Starjedi.ttf', 24)
+        self.favicon = pygame.image.load('../assets/images/favicon.png')
         self.score = 0
 
         self.score_to_win = score_to_win
@@ -48,8 +49,8 @@ class Game:
         pygame.display.set_icon(self.favicon)
 
         # button images
-        start_image = pygame.image.load('../../assets/images/buttonimages/start.png')
-        exit_image = pygame.image.load('../../assets/images/buttonimages/exitbutton.png').convert_alpha()
+        start_image = pygame.image.load('../assets/images/buttonimages/start.png')
+        exit_image = pygame.image.load('../assets/images/buttonimages/exitbutton.png').convert_alpha()
 
         # buttons
         start_button = button.Button(265, 200, start_image, 0.4)
@@ -62,7 +63,7 @@ class Game:
             window.fill((220, 141, 30))
 
             # text draw on screen
-            text.draw_text(window, 'welcome to space invaders!', self.font, black_color, 140, screen_height / 5)
+            draw_text(window, 'welcome to space invaders!', self.font, (0, 0, 0), 140, screen_height / 5)
 
             # draw button on screen and check for interaction
             if start_button.draw_button(window):
@@ -90,17 +91,17 @@ class Game:
             clock.tick(60)
 
     # generates enemies on screen
-    def generate_enemy(self,enemies, min, max):
+    def generate_enemy(self, enemies, min_enemy, max_enemy):
 
-        number_of_enemies = random.randint(min, max)
+        number_of_enemies = random.randint(min_enemy, max_enemy)
 
         while len(enemies) != number_of_enemies:
 
-            enemy_hp = random.randint(1,3)
+            enemy_hp = random.randint(1, 3)
             enemy_pos_x = random.randint(0, self.game_window_width)
             enemy_pos_y = random.randint(0, int(self.game_window_height - self.game_window_height / 2) - 0)
 
-            enemy = Enemy((enemy_pos_x, enemy_pos_y), self.game_window_width, self.game_window_height,enemy_hp)
+            enemy = Enemy((enemy_pos_x, enemy_pos_y), self.game_window_width, self.game_window_height, enemy_hp)
             enemy.check_constraint()
             enemies.add(enemy)
 
@@ -112,23 +113,20 @@ class Game:
                         enemy.kill()
                         break
 
-        print("Enemies initialized successfully, generated " + str(number_of_enemies) + " enemies")
-
-
-    #a random enemy shoots a blaster bolt
+    # a random enemy shoots a blaster bolt
     def enemy_shoot(self):
         if self.enemies.sprites():
             random_enemy = random.choice(self.enemies.sprites())
-            enemy_bolt = Bolt(random_enemy.rect.center,"green",self.game_window_height,10)
+            enemy_bolt = Bolt(random_enemy.rect.center, "green", self.game_window_height, 10)
             self.enemy_bolts.add(enemy_bolt)
 
+    # checks for collisions, both from the player and the enemies
+    def check_collision(self, player):
 
-    def check_collision(self,player):
-
-        #checks if player hit an enemy
+        # checks if player hit an enemy
         if player.sprite.bolts:
             for bolt in player.sprite.bolts:
-                enemies_hit = pygame.sprite.spritecollide(bolt,self.enemies,False)
+                enemies_hit = pygame.sprite.spritecollide(bolt, self.enemies, False)
                 if enemies_hit:
                     for enemy in enemies_hit:
                         bolt.kill()
@@ -137,19 +135,19 @@ class Game:
                             self.score += enemy.score_value
                             enemy.kill()
 
-
-        #checks if an enemy hit the player
+        # checks if an enemy hit the player
         if self.enemy_bolts.sprites():
             for bolt in self.enemy_bolts:
-                if pygame.sprite.spritecollide(bolt,player,False):
+                if pygame.sprite.spritecollide(bolt, player, False):
                     bolt.kill()
                     player.sprite.hp -= 1
 
+    def message(self, surface, message, color):
+        message_surface = self.font.render(message, False, color)
+        message_rect = message_surface.get_rect(center=(self.game_window_width/2, self.game_window_height/2))
+        surface.blit(message_surface, message_rect)
 
-    def message(self,surface,message,color):
-        message_surface = self.font.render(message,False,color)
-        message_rect = message_surface.get_rect(center = (self.game_window_width/2,self.game_window_height/2))
-        surface.blit(message_surface,message_rect)
+    # draws text on given surface
 
     def start_game(self):
         pygame.init()
@@ -162,22 +160,19 @@ class Game:
         pygame.display.set_caption(self.title)
 
         # loads background
-        background = pygame.image.load("../../assets/images/background.png")
+        background = pygame.image.load("../assets/images/background.png")
         background = pygame.transform.scale(background, (self.game_window_width, self.game_window_height))
 
         # player initialized
         player_sprite = Player((self.game_window_width / 2, self.game_window_height), self.game_window_width, self.game_window_height, 10)
         player = pygame.sprite.GroupSingle(player_sprite)
 
-        # enemies initialized
-        self.generate_enemy(self.enemies, 5, 10)
-
         # favicon
         pygame.display.set_icon(self.favicon)
 
-        #enemies timer of shooting
+        # enemies timer of shooting
         enemy_bolt_frequency = pygame.USEREVENT + 1
-        pygame.time.set_timer(enemy_bolt_frequency,self.frequency)
+        pygame.time.set_timer(enemy_bolt_frequency, self.frequency)
 
         # game loop
         while True:
@@ -191,17 +186,17 @@ class Game:
             # draws all the bolts on screen
             player.sprite.bolts.draw(window)
 
-            #generates random number of enemies and generates again if there are no more enemies
+            # generates random number of enemies and generates again if there are no more enemies
             if len(self.enemies) == 0 and player.sprite.is_alive() and self.score <= self.score_to_win:
                 player.sprite.bolts.empty()
                 self.enemy_bolts.empty()
-                self.generate_enemy(self.enemies,5,10)
+                self.generate_enemy(self.enemies, 5, 10)
 
-           # if there's less then two enemies, shooting frequency gets halved, so it's not unfair
+            # if there's less than two enemies, shooting frequency gets halved, so it's not unfair
             if len(self.enemies) <= 2:
-                self.frequency *= 2
+                self.frequency = 500
 
-            #if there's more enemy then two, shooting frequency goes back to normal
+            # if there's more enemy than two, shooting frequency goes back to normal
             if len(self.enemies) > 2:
                 self.frequency = 250
 
@@ -223,7 +218,10 @@ class Game:
             player.sprite.bolts.update()
 
             # score text
-            text.draw_text(window, f"Score: {self.score}", self.font, (255, 232, 31), 0, 0)
+            draw_text(window, f"Score: {self.score}", self.font, (255, 232, 31), 10, 0)
+
+            # lives text
+            draw_text(window, f"Lives: {player.sprite.hp}", self.font, (255,232,31), self.game_window_width-125, 0)
 
             # checks if player won
             if self.score >= self.score_to_win:
@@ -252,15 +250,10 @@ class Game:
                     self.enemy_shoot()
 
                 if event.type == pygame.QUIT:
-                    break
+                    pygame.quit()
+                    return
 
             pygame.display.update()
             clock.tick(60)
 
         pygame.quit()
-
-
-
-
-
-
