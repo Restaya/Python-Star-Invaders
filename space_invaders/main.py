@@ -3,7 +3,7 @@
 # Code has been adjusted,not copied entirely
 # Enemy generation logic selfwritten
 
-from space_invaders.gui.game import Game
+from gui.game import Game
 
 if __name__ == "__main__":
     game = Game(800,600,25)

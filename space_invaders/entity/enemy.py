@@ -7,7 +7,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def __init__(self, position, screen_width, screen_height, hp=1):
         super().__init__()
-        self.image = pygame.image.load("../assets/images/ship/tiefighter.png").convert_alpha()
+        self.image = pygame.image.load("space_invaders/assets/images/ship/tiefighter.png").convert_alpha()
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect(center=position)
         self.max_x = screen_width
@@ -17,10 +17,10 @@ class Enemy(pygame.sprite.Sprite):
 
     # ensures enemy doesn't generate outside the window
     def check_constraint(self):
-        if self.rect.left <= 10:
-            self.rect.left = 10
-        if self.rect.right >= self.max_x - 10:
-            self.rect.right = self.max_x - 10
+        if self.rect.left <= 0:
+            self.rect.left = 0
+        if self.rect.right >= self.max_x:
+            self.rect.right = self.max_x
         if self.rect.top <= 0:
             self.rect.top = 0
         if self.rect.bottom >= self.max_y - self.max_y/3:

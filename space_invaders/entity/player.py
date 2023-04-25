@@ -1,4 +1,5 @@
 import pygame
+
 from space_invaders.entity.bolt import Bolt
 
 
@@ -6,7 +7,7 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self, position, screen_width, screen_height, speed):
         super().__init__()
-        self.image = pygame.image.load("../assets/images/ship/xwing.png").convert_alpha()
+        self.image = pygame.image.load("space_invaders/assets/images/ship/xwing.png").convert_alpha()
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect(midbottom=position)
         self.speed_normal = speed
@@ -51,8 +52,8 @@ class Player(pygame.sprite.Sprite):
             self.rect.left = 0
         if self.rect.right >= self.max_x:
             self.rect.right = self.max_x
-        if self.rect.top <= self.max_y - self.max_y/3 - 25:
-            self.rect.top = self.max_y - self.max_y/3 - 25
+        if self.rect.top <= self.max_y - self.max_y/3:
+            self.rect.top = self.max_y - self.max_y/3
         if self.rect.bottom >= self.max_y:
             self.rect.bottom = self.max_y
 

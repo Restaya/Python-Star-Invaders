@@ -21,8 +21,8 @@ class Game:
         self.title = "Space Invaders"
 
         pygame.init()
-        self.font = pygame.font.Font('../assets/font/Starjedi.ttf', 24)
-        self.favicon = pygame.image.load('../assets/images/favicon.png')
+        self.font = pygame.font.Font('space_invaders/assets/font/Starjedi.ttf', 24)
+        self.favicon = pygame.image.load('space_invaders/assets/images/favicon.png')
         self.score = 0
 
         self.score_to_win = score_to_win
@@ -49,8 +49,8 @@ class Game:
         pygame.display.set_icon(self.favicon)
 
         # button images
-        start_image = pygame.image.load('../assets/images/buttonimages/start.png')
-        exit_image = pygame.image.load('../assets/images/buttonimages/exitbutton.png').convert_alpha()
+        start_image = pygame.image.load('space_invaders/assets/images/buttonimages/start.png')
+        exit_image = pygame.image.load('space_invaders/assets/images/buttonimages/exitbutton.png').convert_alpha()
 
         # buttons
         start_button = button.Button(265, 200, start_image, 0.4)
@@ -160,7 +160,7 @@ class Game:
         pygame.display.set_caption(self.title)
 
         # loads background
-        background = pygame.image.load("../assets/images/background.png")
+        background = pygame.image.load("space_invaders/assets/images/background.png")
         background = pygame.transform.scale(background, (self.game_window_width, self.game_window_height))
 
         # player initialized
