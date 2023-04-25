@@ -7,9 +7,9 @@ class Bolt(pygame.sprite.Sprite):
         super().__init__()
 
         if color == "red":
-            self.image = pygame.image.load("space_invaders/assets/images/bolts/redblasterbolt.png").convert_alpha()
+            self.image = pygame.image.load("star_invaders/assets/images/bolts/redblasterbolt.png").convert_alpha()
         if color == "green":
-            self.image = pygame.image.load("space_invaders/assets/images/bolts/greenblasterbolt.png").convert_alpha()
+            self.image = pygame.image.load("star_invaders/assets/images/bolts/greenblasterbolt.png").convert_alpha()
         self.image = pygame.transform.scale(self.image, (10, 10))
         self.image = pygame.transform.rotate(self.image, 90)
         self.speed = speed
@@ -24,3 +24,4 @@ class Bolt(pygame.sprite.Sprite):
     def destroy(self):
         if self.rect.y <= -10 or self.rect.y > self.screen_height + 10:
             self.kill()
+

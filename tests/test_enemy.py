@@ -2,7 +2,7 @@ import unittest
 import pygame
 import os
 
-from space_invaders.entity.enemy import Enemy
+from star_invaders.entity.enemy import Enemy
 
 
 class TestEnemy(unittest.TestCase):

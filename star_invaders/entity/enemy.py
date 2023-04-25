@@ -7,7 +7,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def __init__(self, position, screen_width, screen_height, hp=1):
         super().__init__()
-        self.image = pygame.image.load("space_invaders/assets/images/ship/tiefighter.png").convert_alpha()
+        self.image = pygame.image.load("star_invaders/assets/images/ship/tiefighter.png").convert_alpha()
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect(center=position)
         self.max_x = screen_width

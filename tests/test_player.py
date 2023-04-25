@@ -2,7 +2,7 @@ import unittest
 import pygame
 import os
 
-from space_invaders.entity.player import Player
+from star_invaders.entity.player import Player
 
 
 class TestPlayer(unittest.TestCase):

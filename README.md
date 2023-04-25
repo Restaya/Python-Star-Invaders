@@ -17,3 +17,9 @@ D - moves right / jobbra megy
 S - moves backwards / hátra megy
 SPACE - shoot / lövés
 
+You can run tests with this command inside the project folder:
+coverage run -m pytest tests/ ; coverage  report
+
+A tesztek futtathatók ezzel a parancssal a projekt mappán belül:
+coverage run -m pytest tests/ ; coverage  report
+

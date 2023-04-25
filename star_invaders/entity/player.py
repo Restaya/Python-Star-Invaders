@@ -1,13 +1,13 @@
 import pygame
 
-from space_invaders.entity.bolt import Bolt
+from star_invaders.entity.bolt import Bolt
 
 
 class Player(pygame.sprite.Sprite):
 
     def __init__(self, position, screen_width, screen_height, speed):
         super().__init__()
-        self.image = pygame.image.load("space_invaders/assets/images/ship/xwing.png").convert_alpha()
+        self.image = pygame.image.load("star_invaders/assets/images/ship/xwing.png").convert_alpha()
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect(midbottom=position)
         self.speed_normal = speed
