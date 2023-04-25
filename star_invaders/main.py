@@ -4,6 +4,9 @@
 # Enemy generation logic selfwritten
 
 from gui.game import Game
+import os
+
+os.chdir('../')
 
 if __name__ == "__main__":
     game = Game(800,600,25)

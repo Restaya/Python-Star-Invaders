@@ -23,3 +23,10 @@ coverage run -m pytest tests/ ; coverage  report
 A tesztek futtathatók ezzel a parancssal a projekt mappán belül:
 coverage run -m pytest tests/ ; coverage  report
 
+How to launch from PyCharm:
+
+In the main/main.py run the Current File option
+
+Hogyan inditsd:
+
+main/main.py-ban indítsd el a Current File opcióval
