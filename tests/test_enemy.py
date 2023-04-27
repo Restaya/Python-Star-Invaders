@@ -1,6 +1,5 @@
 import unittest
 import pygame
-import os
 
 from star_invaders.entity.enemy import Enemy
 
@@ -13,11 +12,11 @@ class TestEnemy(unittest.TestCase):
         window_height = 600
         window_width = 800
         window = pygame.display.set_mode((800, 600))
-        enemy = Enemy((0,0),window_width,window_height)
+        enemy = Enemy((0, 0), window_width, window_height)
 
         enemy.rect.left = -10
         enemy.check_constraint()
-        self.assertEqual(enemy.rect.left,0)
+        self.assertEqual(enemy.rect.left, 0)
 
         enemy.rect.y = -10
         enemy.check_constraint()

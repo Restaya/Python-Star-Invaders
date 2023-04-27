@@ -30,3 +30,10 @@ In the main/main.py run the Current File option
 Hogyan inditsd:
 
 main/main.py-ban indítsd el a Current File opcióval
+
+Pylint test command in folder:
+pylint ./* --recursive=true --disable=no-member,too-many-statements,import-error,line-too-long
+
+Flake8 command in folder:
+flake8 ./
+

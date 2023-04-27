@@ -1,5 +1,6 @@
-import pygame
 import random
+import pygame
+
 
 import star_invaders.gui.button as button
 from star_invaders.entity.player import Player
@@ -148,7 +149,6 @@ class Game:
         surface.blit(message_surface, message_rect)
 
     # draws text on given surface
-
     def start_game(self):
         pygame.init()
 
@@ -221,18 +221,18 @@ class Game:
             draw_text(window, f"Score: {self.score}", self.font, (255, 232, 31), 10, 0)
 
             # lives text
-            draw_text(window, f"Lives: {player.sprite.hp}", self.font, (255,232,31), self.game_window_width-125, 0)
+            draw_text(window, f"Lives: {player.sprite.hp}", self.font, (255, 232, 31), self.game_window_width-125, 0)
 
             # checks if player won
             if self.score >= self.score_to_win:
-                self.message(window, f"You have defeated the Empire!", (255, 232, 31))
+                self.message(window, "You have defeated the Empire!", (255, 232, 31))
                 pygame.display.update()
                 pygame.time.wait(4000)
                 break
 
             # checks if player still alive
             if not player.sprite.is_alive():
-                self.message(window, f"You were the chosen one!", (255, 0, 0))
+                self.message(window, "You were the chosen one!", (255, 0, 0))
                 pygame.display.update()
                 pygame.time.wait(4000)
                 break

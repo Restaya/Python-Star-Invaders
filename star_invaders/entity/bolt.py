@@ -24,4 +24,3 @@ class Bolt(pygame.sprite.Sprite):
     def destroy(self):
         if self.rect.y <= -10 or self.rect.y > self.screen_height + 10:
             self.kill()
-

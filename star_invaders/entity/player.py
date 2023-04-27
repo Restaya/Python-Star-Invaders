@@ -29,7 +29,6 @@ class Player(pygame.sprite.Sprite):
             self.shoot()
             self.ready = False
             self.bolt_time = pygame.time.get_ticks()
-            
         if keys[pygame.K_d]:
             self.rect.x += self.speed_normal
         elif keys[pygame.K_a]:

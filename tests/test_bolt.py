@@ -4,6 +4,7 @@ import pygame
 from star_invaders.gui.game import Game
 from star_invaders.entity.player import Player
 
+
 class TestBolt(unittest.TestCase):
 
     # tests if the shoots method bolts get deleted after leaving the screen window
@@ -16,17 +17,17 @@ class TestBolt(unittest.TestCase):
 
         player = Player((game.game_window_width / 2, game.game_window_height), game.game_window_width, game.game_window_height, 10)
 
-        self.assertEqual(len(player.bolts),0) # player starts with 0 bolts fired
+        self.assertEqual(len(player.bolts), 0)  # player starts with 0 bolts fired
 
         player.shoot()
 
-        self.assertEqual(len(player.bolts),2) # players shoots 2 bolts
+        self.assertEqual(len(player.bolts), 2)  # players shoots 2 bolts
 
         for bolt in player.bolts:
             bolt.rect.y = -10
             bolt.update()
 
-        self.assertNotEqual(len(player.bolts),2)
+        self.assertNotEqual(len(player.bolts), 2)
 
         player.shoot()
 
@@ -37,8 +38,3 @@ class TestBolt(unittest.TestCase):
             bolt.update()
 
         self.assertNotEqual(len(player.bolts), 2)
-
-
-
-
-
