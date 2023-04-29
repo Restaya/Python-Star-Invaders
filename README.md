@@ -5,7 +5,7 @@ You have to reach a certain score to win (25 by default), each enemy gives some 
 
 Controls:
 
-W - moves forward/ előre megy
+W - moves forward
 
 The player can only move to 1/4-th of the screen height
 
