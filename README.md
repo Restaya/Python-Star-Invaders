@@ -9,8 +9,6 @@ W - moves forward/ előre megy
 
 The player can only move to 1/4-th of the screen height
 
-A játékos a pálya magasságának 1/4-ig tud menni
-
 A - moves left
 
 D - moves right
