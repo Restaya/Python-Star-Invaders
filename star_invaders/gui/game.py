@@ -1,17 +1,16 @@
 import random
 import pygame
 
-
-import star_invaders.gui.button as button
+from star_invaders.gui import button
 from star_invaders.entity.player import Player
 from star_invaders.entity.enemy import Enemy
 from star_invaders.entity.bolt import Bolt
 
 
-# draws text on given surface
-def draw_text(surface, text, font, text_color, x, y):
+# draws text on given position
+def draw_text(surface, text, font, text_color, position):
     image = font.render(text, True, text_color)
-    surface.blit(image, (x, y))
+    surface.blit(image, position)
 
 
 class Game:
@@ -64,7 +63,7 @@ class Game:
             window.fill((220, 141, 30))
 
             # text draw on screen
-            draw_text(window, 'welcome to space invaders!', self.font, (0, 0, 0), 140, screen_height / 5)
+            draw_text(window, 'welcome to space invaders!', self.font, (0, 0, 0), (140, screen_height / 5))
 
             # draw button on screen and check for interaction
             if start_button.draw_button(window):
@@ -143,6 +142,7 @@ class Game:
                     bolt.kill()
                     player.sprite.hp -= 1
 
+    # draws a text in the middle of the given surface
     def message(self, surface, message, color):
         message_surface = self.font.render(message, False, color)
         message_rect = message_surface.get_rect(center=(self.game_window_width/2, self.game_window_height/2))
@@ -218,10 +218,10 @@ class Game:
             player.sprite.bolts.update()
 
             # score text
-            draw_text(window, f"Score: {self.score}", self.font, (255, 232, 31), 10, 0)
+            draw_text(window, f"Score: {self.score}", self.font, (255, 232, 31), (10, 0))
 
             # lives text
-            draw_text(window, f"Lives: {player.sprite.hp}", self.font, (255, 232, 31), self.game_window_width-125, 0)
+            draw_text(window, f"Lives: {player.sprite.hp}", self.font, (255, 232, 31), (self.game_window_width-125, 0))
 
             # checks if player won
             if self.score >= self.score_to_win:
@@ -237,6 +237,7 @@ class Game:
                 pygame.time.wait(4000)
                 break
 
+            # checks for keyboard input from the player
             keys = pygame.key.get_pressed()
             if keys[pygame.K_w] or keys[pygame.K_a] or keys[pygame.K_d] or keys[pygame.K_s] or keys[pygame.K_SPACE]:
                 player.update()

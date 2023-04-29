@@ -6,6 +6,7 @@ from star_invaders.entity.player import Player
 
 class TestPlayer(unittest.TestCase):
 
+    # test for player can't move offscreen
     def test_player_constraints(self):
 
         pygame.init()
@@ -32,6 +33,7 @@ class TestPlayer(unittest.TestCase):
 
         pygame.quit()
 
+    # tests players ability to shoot with a cooldown
     def test_player_shoot(self):
 
         pygame.init()

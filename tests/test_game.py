@@ -4,6 +4,7 @@ import pygame
 from star_invaders.gui.game import Game
 
 
+# tests the game's enemy generation
 class TestGui(unittest.TestCase):
 
     def test_init(self):
@@ -17,3 +18,4 @@ class TestGui(unittest.TestCase):
 
         game.generate_enemy(game.enemies, 5, 10)
         self.assertGreaterEqual(len(game.enemies), 5)
+        pygame.quit()

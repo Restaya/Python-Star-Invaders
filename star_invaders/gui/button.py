@@ -11,7 +11,7 @@ class Button:
         self.rect.topleft = (x, y)
         self.clicked = False
 
-    # Draws button on screen
+    # draws button on screen
     def draw_button(self, surface):
         action = False
 

@@ -17,24 +17,24 @@ class TestBolt(unittest.TestCase):
 
         player = Player((game.game_window_width / 2, game.game_window_height), game.game_window_width, game.game_window_height, 10)
 
-        self.assertEqual(len(player.bolts), 0)  # player starts with 0 bolts fired
+        self.assertEqual(len(player.bolts), 0, "Player stats with zero bolts in array")
 
         player.shoot()
 
-        self.assertEqual(len(player.bolts), 2)  # players shoots 2 bolts
+        self.assertEqual(len(player.bolts), 2, "Checks if player shot two bolts and it's working properly")
 
         for bolt in player.bolts:
             bolt.rect.y = -10
             bolt.update()
 
-        self.assertNotEqual(len(player.bolts), 2)
+        self.assertNotEqual(len(player.bolts), 2, "Checks if the bolts were removed when they flew offscreen")
 
         player.shoot()
 
-        self.assertEqual(len(player.bolts), 2)
+        self.assertEqual(len(player.bolts), 2, "Checks if the bolts are added to the player")
 
         for bolt in player.bolts:
             bolt.speed = 50
             bolt.update()
 
-        self.assertNotEqual(len(player.bolts), 2)
+        self.assertNotEqual(len(player.bolts), 2, "Checks if the bolts were removed when they flew offscreen")

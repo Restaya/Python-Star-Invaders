@@ -6,6 +6,7 @@ from star_invaders.entity.enemy import Enemy
 
 class TestEnemy(unittest.TestCase):
 
+    # checks if enemy is within the screens boundaries and not offscreen
     def test_enemy_constraints(self):
 
         pygame.init()

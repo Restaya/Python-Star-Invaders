@@ -17,10 +17,12 @@ class Bolt(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect(center=position)
 
+    # changes the y location of the bolt according to the speed on the screen, and checks if it's still on the screen
     def update(self):
         self.rect.y += self.speed
         self.destroy()
 
+    # removes the bolt from the screen if it goes offscreen
     def destroy(self):
         if self.rect.y <= -10 or self.rect.y > self.screen_height + 10:
             self.kill()
