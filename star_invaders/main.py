@@ -1,4 +1,4 @@
-#
+# The game's base logic code was made following a tutorial from Clear Code, how to create sprites, check for collision and draw sprites on screen
 import os
 from gui.game import Game
 
