@@ -9,7 +9,7 @@ Controls:
 
 You can run tests with this command inside the project folder:<br>
 coverage run -m pytest tests/ ; coverage  report <br>
-// CURRENLTY NOT WORKING DUE TO IMPORT ERROR//
+python -m unittest
 
 Install the packages using this command: pip install -r .\requirements.txt
 Launch the /star_invaders/main.py file to start the game
