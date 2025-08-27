@@ -32,6 +32,7 @@ MANIFEST
 
 #Test reports
 .flake-report
+pylint.html
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

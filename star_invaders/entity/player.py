@@ -1,6 +1,6 @@
 import pygame
 
-from star_invaders.entity.bolt import Bolt
+from entity.bolt import Bolt
 
 
 class Player(pygame.sprite.Sprite):

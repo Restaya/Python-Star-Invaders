@@ -12,10 +12,12 @@ class TestBolt(unittest.TestCase):
 
         pygame.init()
 
-        game = Game(800, 600, 25)
-        window = pygame.display.set_mode((game.game_window_width, game.game_window_height))
+        window_width = 800
+        window_height = 600
+        game = Game(window_width, window_height, 25)
+        pygame.display.set_mode((window_width, window_height))
 
-        player = Player((game.game_window_width / 2, game.game_window_height), game.game_window_width, game.game_window_height, 10)
+        player = Player((window_width / 2, window_height), window_width, window_height, 10)
 
         self.assertEqual(len(player.bolts), 0, "Player stats with zero bolts in array")
 

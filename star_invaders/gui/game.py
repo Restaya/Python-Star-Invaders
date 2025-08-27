@@ -1,10 +1,10 @@
 import random
 import pygame
 
-from star_invaders.gui import button
-from star_invaders.entity.player import Player
-from star_invaders.entity.enemy import Enemy
-from star_invaders.entity.bolt import Bolt
+from gui import button
+from entity.player import Player
+from entity.enemy import Enemy
+from entity.bolt import Bolt
 
 
 # draws text on given position
