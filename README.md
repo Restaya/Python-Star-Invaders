@@ -5,27 +5,19 @@ You have to reach a certain score to win (25 by default), each enemy gives some 
 
 Controls:
 
-W - moves forward
+- Use W,A,S,D to move around, press SPACE to shoot
 
-The player can only move to 1/4-th of the screen height
+You can run tests with this command inside the project folder:<br>
+coverage run -m pytest tests/ ; coverage  report <br>
+python -m unittest
 
-A - moves left
+Install the packages using this command: pip install -r .\requirements.txt
+Launch the /star_invaders/main.py file to start the game
 
-D - moves right
-
-S - moves backwards
-
-SPACE - shoot
-
-You can run tests with this command inside the project folder:
-coverage run -m pytest tests/ ; coverage  report
-
-How to launch from PyCharm:
-In the star_invaders/main.py run the Current File option
-
-Pylint html generation command in folder:
+Pylint html generation command in folder:<br>
 pylint star_invaders tests --disable=no-member,too-many-statements,import-error,line-too-long,missing-function-docstring,missing-module-docstring,missing-class-docstring  --output-format=json | pylint-json2html -o pylint.html
 
-Flake8 command in folder:
+Flake8 command in folder:<br>
 flake8 ./ --ignore=E501,E226,F841 --format=html --htmldir=flake-report
 
+<img width="800" height="400" alt="space_invaders" src="https://github.com/user-attachments/assets/2dc83908-3ddd-4e25-b791-04183e722316" />
